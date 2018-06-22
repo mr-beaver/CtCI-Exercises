@@ -1,6 +1,9 @@
 class Stack:
-	def __init__(self, newList = []):
-		self.stack = newList
+	def __init__(self, newList = None):
+		if newList is None:
+			self.stack = []
+		else:
+			self.stack = newList
 
 	def pop(self):
 		if len(self.stack):
