@@ -11,35 +11,68 @@ def quickSort(arr):
 		return arr
 
 def quickSortInternal(arr, low, high):
-	if low >= high:
-		return
-	else:
+	if low < high:
 		pivot = (low + high) // 2
 		pivot = partition(arr, low, high, pivot)
 		quickSortInternal(arr, low, pivot - 1)
 		quickSortInternal(arr, pivot + 1, high)
 
-def partition(arr, low, high, pivot):
-	#swap the elment in pivot position and low position
-	arr[low], arr[pivot] = arr[pivot], arr[low]
 
-	i = low + 1
+#caveat for two element arrays: 
+#Since we use mid(floored) value as pivot point,
+#we should not use switch arr[low] and arr[pivot], which causes pivot value not getting swapped
+#we should swap arr[high] and arr[pivot], which guarantees a swap of element
+def partition(arr, low, high, pivot):
+	print("low: {}, high: {}, pivot: {}, arr: {}".format(low, high, pivot, arr))
+	#swap pivot element with last element in the array
+	arr[pivot], arr[high] = arr[high], arr[pivot]
+
+	i = low
 	j = high
 
 	while i < j:
-		if arr[i] <= arr[low]:
+
+		#move left pointer
+		while i < j and arr[i] <= arr[high]:
 			i += 1
-		elif arr[j] >= arr[low]:
+
+		#move right pointer
+		while i < j and arr[j] >= arr[high]:
 			j -= 1
-		else:
+
+		#swap out of order elements
+		if i < j:
 			arr[i], arr[j] = arr[j], arr[i]
 
-	#swap back pivot, new j should be at the top of first section
-	arr[low], arr[j] = arr[j], arr[low]
+	arr[i], arr[high] = arr[high], arr[i]
 
-	print("low: {}, high: {}, pivot: {}, arr: {}".format(low, high, pivot, arr))
+	return i
 
-	return j
+	#swap the elment in pivot position and low position
+	# arr[low], arr[pivot] = arr[pivot], arr[low]
+
+	# i = low
+	# j = high
+
+	# while i < j:
+		
+	# 	#move left pointer
+	# 	while i < j and arr[i] <= arr[low]:
+	# 		i += 1
+
+	# 	#move right pointer
+	# 	while i < j and arr[j] >= arr[low]:
+	# 		j -= 1
+
+	# 	#swap out of roder elements
+	# 	if i < j:
+	# 		arr[i], arr[j] = arr[j], arr[i]
+
+	# 	print('i {}, j {}, arr: {}'.format(i, j, arr))
+
+	# arr[low], arr[i-1] = arr[i-1], arr[low]
+
+	# return i-1
 
 if __name__ == "__main__":
 	inputStr = input("Please input a list of integers separated by comma(,): ")
