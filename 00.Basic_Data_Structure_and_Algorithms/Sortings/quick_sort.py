@@ -48,6 +48,7 @@ def partition(arr, low, high, pivot):
 
 	return i
 
+	#DO NOT DO THIS
 	#swap the elment in pivot position and low position
 	# arr[low], arr[pivot] = arr[pivot], arr[low]
 
