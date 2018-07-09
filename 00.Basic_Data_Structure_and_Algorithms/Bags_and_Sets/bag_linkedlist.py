@@ -10,6 +10,8 @@ class BagLinkedList:
 		self.frontSentinel = front
 		self.backSentinel = back
 
+		!!frontSentinel and backSentinel also needs to be a Node!!
+
 	def _addBefore(self, node = None, value = 0):
 		if node != None:
 			newNode = Node(value, node.prev, node)
